@@ -3,6 +3,6 @@ Flask-Cors==5.0.0
 dlib==19.24.6
 keras==3.8.0
 opencv-python==4.10.0.84
-numpy==1.25.2
+numpy==1.26.0
 pandas==2.2.3
 tensorflow==2.18.0  # Add this line for TensorFlow
