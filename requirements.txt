@@ -1,8 +1,10 @@
 Flask==3.1.0
 Flask-Cors==5.0.0
-dlib==19.24.6
 keras==3.8.0
+mtcnn==1.0.0
+numpy==2.0.2
 opencv-python==4.10.0.84
-numpy==1.26.0
 pandas==2.2.3
-tensorflow==2.18.0  # Add this line for TensorFlow
+scikit-learn==1.6.0
+scipy==1.15.0
+tensorflow==2.18.0
