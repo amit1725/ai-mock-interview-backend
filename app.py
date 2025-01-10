@@ -11,14 +11,6 @@ import tensorflow as tf
 # Disable GPU usage (use CPU only)
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
-# Limit TensorFlow memory usage to a specified amount (e.g., 4096 MB)
-physical_devices = tf.config.list_physical_devices('CPU')
-if physical_devices:
-    tf.config.set_logical_device_configuration(
-        physical_devices[0],
-        [tf.config.LogicalDeviceConfiguration(memory_limit=4096)]  # Set an appropriate limit in MB
-    )
-
 # Dropbox direct download URL
 DROPBOX_URL = "https://www.dropbox.com/scl/fi/fm5a49snvm6sk3ouq0l3z/affectnet_model.keras?rlkey=a9cc28vkdnt8jb6az289nab0n&st=uns5oeie&dl=1"
 MODEL_PATH = "affectnet_model.keras"
