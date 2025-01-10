@@ -6,6 +6,18 @@ from keras.models import load_model
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from mtcnn import MTCNN  # Import MTCNN for face and landmark detection
+import tensorflow as tf
+
+# Disable GPU usage (use CPU only)
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+
+# Limit TensorFlow memory usage to a specified amount (e.g., 4096 MB)
+physical_devices = tf.config.list_physical_devices('CPU')
+if physical_devices:
+    tf.config.set_logical_device_configuration(
+        physical_devices[0],
+        [tf.config.LogicalDeviceConfiguration(memory_limit=4096)]  # Set an appropriate limit in MB
+    )
 
 # Dropbox direct download URL
 DROPBOX_URL = "https://www.dropbox.com/scl/fi/fm5a49snvm6sk3ouq0l3z/affectnet_model.keras?rlkey=a9cc28vkdnt8jb6az289nab0n&st=uns5oeie&dl=1"
@@ -43,7 +55,7 @@ emotion_labels = ['Anger', 'Contempt', 'Disgust', 'Fear', 'Happy', 'Neutral', 'S
 detector = MTCNN()
 
 # Initialize Flask app and CORS
-app = Flask(_name_)
+app = Flask(__name__)
 CORS(app)
 
 def preprocess_frame(frame, target_size=(96, 96)):
@@ -166,5 +178,7 @@ def analyze_video():
 
     return jsonify(summary)
 
-if _name_ == '_main_':
-    app.run()
+if __name__ == '__main__':
+    # Ensure the app binds to the correct port
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
